@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Adicionar Funcionário</title>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h2>Agendamento de Serviços</h2>
+            <form id="funcionarioForm">
+                <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Nome"
+                    required
+                />
+                <input
+                    type="text"
+                    id="telefone"
+                    name="telefone"
+                    placeholder="Telefone"
+                    required
+                />
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                />
+
+                <input
+                    type="text"
+                    id="servico"
+                    name="servico"
+                    placeholder="Serviço Desejado"
+                    required
+                />
+
+                <input
+                    type="datetime-local"
+                    id="dataHora"
+                    name="dataHora"
+                    required
+                />
+
+                <button type="submit">Adicionar</button>
+            </form>
+            <p id="response"></p>
+        </div>
+        <script>
+            document
+                .getElementById("funcionarioForm")
+                .addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const nome = document.getElementById("nome").value;
+                    const telefone = document.getElementById("telefone").value;
+                    const email = document.getElementById("email").value;
+                    const servico = document.getElementById("servico").value;
+
+                    const response = await fetch("/addFuncionario", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            nome,
+                            telefone,
+                            email,
+                            servico,
+                        }),
+                    });
+
+                    const responseText = await response.text();
+                    document.getElementById("response").textContent =
+                        responseText;
+
+                    setTimeout(() => {
+                        location.reload();
+                    }, 3000);
+                });
+        </script>
+    </body>
+</html>
