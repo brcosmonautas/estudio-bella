@@ -1,10 +1,10 @@
-require('dotenv').config(); // Carrega variáveis de ambiente do arquivo .env
+require('dotenv').config(); 
 const express = require('express');
 const { Pool } = require('pg');
 const app = express();
 const port = 3000;
 
-// Atualize a string de conexão com a senha correta
+
 const pool = new Pool({
   connectionString: 'postgresql://postgres.cnzkxerdjnlmbkcqjqof:[SENHA DO DATABASE]@aws-0-sa-east-1.pooler.supabase.com:6543/postgres?sslmode=require',
   ssl: {
@@ -31,7 +31,6 @@ app.post('/addFuncionario', async (req, res) => {
   }
 });
 
-// Inicializa o servidor
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });
